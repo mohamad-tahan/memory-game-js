@@ -26,4 +26,22 @@ function randomSequence() {
     }, 200);
     document.getElementById(currentColor).style.backgroundColor = "grey";
   }
-  
+
+  function playSound(colorSounds) {
+    if (colorSounds == "green") {
+      var green = new Audio("assets/green.mp3");
+      green.play();
+    } else if (colorSounds == "red") {
+      var red = new Audio("assets/red.mp3");
+      red.play();
+    } else if (colorSounds == "blue") {
+      var blue = new Audio("assets/blue.mp3");
+      blue.play();
+    } else if (colorSounds == "yellow") {
+      var yellow = new Audio("assets/yellow.mp3");
+      yellow.play();
+    } else {
+      var wrong = new Audio("assets/wrong.mp3");
+      wrong.play();
+    }
+  }
