@@ -19,3 +19,11 @@ function randomSequence() {
     document.getElementsByTagName("h1")[0].innerHTML = "Level " + level;
     
   }
+
+  function buttonColorChange(currentColor) {
+    setTimeout(function () {
+      document.getElementById(currentColor).style.backgroundColor = currentColor;
+    }, 200);
+    document.getElementById(currentColor).style.backgroundColor = "grey";
+  }
+  
