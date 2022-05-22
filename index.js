@@ -46,6 +46,19 @@ function randomSequence() {
     }
   }
 
+  var button = document.querySelectorAll(".btn");
+button.forEach((btn) => {
+  btn.addEventListener("click", function handleClick(event) {
+    var clickedColor = event.target.id;
+    clickedSequence.push(clickedColor);
+    playSound(clickedColor);
+    buttonColorChange(clickedColor);
+    if (startGame == true) {
+      checkSequence(clickedSequence.length - 1);
+    }
+  });
+});
+
   function checkSequence(sq) {
     if (sequence[sq] === clickedSequence[sq]) {
       if (clickedSequence.length === sequence.length) {
