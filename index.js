@@ -45,3 +45,13 @@ function randomSequence() {
       wrong.play();
     }
   }
+
+  function checkSequence(sq) {
+    if (sequence[sq] === clickedSequence[sq]) {
+      if (clickedSequence.length === sequence.length) {
+        setTimeout(randomSequence, 500);
+      }
+    } else {
+      restart();
+    }
+  }
