@@ -4,6 +4,14 @@ var clickedSequence = [];
 var level = 0;
 var startGame = false;
 
+document.onkeydown = function (evt) {
+    evt = evt || window.event;
+    randomSequence();
+    startGame = true;
+  
+    document.getElementsByTagName("h1")[0].innerHTML = "Level 1";
+  };
+  
 function randomSequence() {
     var random = Math.floor(Math.random() * colors.length);
     var randomColor = colors[random];
