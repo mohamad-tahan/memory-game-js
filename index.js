@@ -5,56 +5,55 @@ var level = 0;
 var startGame = false;
 
 document.onkeydown = function (evt) {
-    evt = evt || window.event;
-    randomSequence();
-    startGame = true;
-  
-    document.getElementsByTagName("h1")[0].innerHTML = "Level 1";
-  };
-  
+  evt = evt || window.event;
+  randomSequence();
+  startGame = true;
+
+  document.getElementsByTagName("h1")[0].innerHTML = "Level 1";
+};
+
 function randomSequence() {
-    var random = Math.floor(Math.random() * colors.length);
-    var randomColor = colors[random];
-    //console.log(randomColor);
-    sequence.push(randomColor);
-    //console.log(sequence);
-    document.getElementById(randomColor).style.visibility = "hidden";
-    setTimeout(function () {
-      document.getElementById(randomColor).style.visibility = "visible";
-    }, 300);
-    clickedSequence = [];
-    level++;
-    document.getElementsByTagName("h1")[0].innerHTML = "Level " + level;
-    
-  }
+  var random = Math.floor(Math.random() * colors.length);
+  var randomColor = colors[random];
+  //console.log(randomColor);
+  sequence.push(randomColor);
+  //console.log(sequence);
+  document.getElementById(randomColor).style.visibility = "hidden";
+  setTimeout(function () {
+    document.getElementById(randomColor).style.visibility = "visible";
+  }, 300);
+  clickedSequence = [];
+  level++;
+  document.getElementsByTagName("h1")[0].innerHTML = "Level " + level;
+}
 
-  function buttonColorChange(currentColor) {
-    setTimeout(function () {
-      document.getElementById(currentColor).style.backgroundColor = currentColor;
-    }, 200);
-    document.getElementById(currentColor).style.backgroundColor = "grey";
-  }
+function buttonColorChange(currentColor) {
+  setTimeout(function () {
+    document.getElementById(currentColor).style.backgroundColor = currentColor;
+  }, 200);
+  document.getElementById(currentColor).style.backgroundColor = "grey";
+}
 
-  function playSound(colorSounds) {
-    if (colorSounds == "green") {
-      var green = new Audio("assets/green.mp3");
-      green.play();
-    } else if (colorSounds == "red") {
-      var red = new Audio("assets/red.mp3");
-      red.play();
-    } else if (colorSounds == "blue") {
-      var blue = new Audio("assets/blue.mp3");
-      blue.play();
-    } else if (colorSounds == "yellow") {
-      var yellow = new Audio("assets/yellow.mp3");
-      yellow.play();
-    } else {
-      var wrong = new Audio("assets/wrong.mp3");
-      wrong.play();
-    }
+function playSound(colorSounds) {
+  if (colorSounds == "green") {
+    var green = new Audio("assets/green.mp3");
+    green.play();
+  } else if (colorSounds == "red") {
+    var red = new Audio("assets/red.mp3");
+    red.play();
+  } else if (colorSounds == "blue") {
+    var blue = new Audio("assets/blue.mp3");
+    blue.play();
+  } else if (colorSounds == "yellow") {
+    var yellow = new Audio("assets/yellow.mp3");
+    yellow.play();
+  } else {
+    var wrong = new Audio("assets/wrong.mp3");
+    wrong.play();
   }
+}
 
-  var button = document.querySelectorAll(".btn");
+var button = document.querySelectorAll(".btn");
 button.forEach((btn) => {
   btn.addEventListener("click", function handleClick(event) {
     var clickedColor = event.target.id;
@@ -67,12 +66,28 @@ button.forEach((btn) => {
   });
 });
 
-  function checkSequence(sq) {
-    if (sequence[sq] === clickedSequence[sq]) {
-      if (clickedSequence.length === sequence.length) {
-        setTimeout(randomSequence, 500);
-      }
-    } else {
-      restart();
+function checkSequence(sq) {
+  if (sequence[sq] === clickedSequence[sq]) {
+    if (clickedSequence.length === sequence.length) {
+      setTimeout(randomSequence, 500);
     }
+  } else {
+    restart();
   }
+}
+
+function restart() {
+  var wrong = new Audio("assets/wrong.mp3");
+  wrong.play();
+  document.getElementsByTagName("h1")[0].innerHTML =
+    "Game Over, Press Any Key to Restart";
+
+  setTimeout(function () {
+    document.getElementsByTagName("body")[0].style.backgroundColor = "red";
+  }, 1);
+  document.getElementsByTagName("body")[0].style.backgroundColor = "blue";
+  document.onkeydown = function (evt) {
+    evt = evt || window.event;
+    window.location.reload();
+  };
+}
